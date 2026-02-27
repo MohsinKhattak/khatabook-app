@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import {
   View,
   Text,
@@ -22,6 +22,7 @@ import { addPerson, createCustomerTable, createTransactionTable, getCustomerCred
 import { KhataPdf } from '../../components';
 import moment from 'moment';
 import { exportData, importData } from '../../utils/exportImport';
+import { useFocusEffect } from '@react-navigation/native';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const scale = SCREEN_WIDTH / 320;
@@ -78,9 +79,9 @@ const HomeScreen = ({ navigation }: any) => {
         setOriginalSupplierList(data)
       }
     }
-    catch (e) {
+    catch (e: any) {
       // Alert.alert("Error", "Error while fetching customers data")
-      console.log("error while fetching customers")
+      console.log("error while fetching customers:", e?.message || e)
     }
     finally {
       setLoading(false)
@@ -107,13 +108,19 @@ const HomeScreen = ({ navigation }: any) => {
 
   useEffect(() => {
     initializeDB();
-    if (activeTab === 0)
-      getCustomerList("customer");
-    else if (activeTab === 1)
-      getCustomerList("supplier");
-    else if (activeTab === 2)
-      fetchBalanceSheetData();
-  }, [activeTab]);
+  }, []);
+
+  // Refresh data when screen comes into focus
+  useFocusEffect(
+    useCallback(() => {
+      if (activeTab === 0)
+        getCustomerList("customer");
+      else if (activeTab === 1)
+        getCustomerList("supplier");
+      else if (activeTab === 2)
+        fetchBalanceSheetData();
+    }, [activeTab])
+  );
 
   useEffect(()=>{
     getUserInfo()

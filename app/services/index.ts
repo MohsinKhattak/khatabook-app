@@ -241,7 +241,9 @@ export const getPeopleList = async (
         LEFT JOIN transactions t ON p.id = t.person_id
         WHERE p.user_id = ? AND p.type = ?
         GROUP BY p.id, p.name, p.mobile_number
-        ORDER BY latest_transaction_date DESC NULLS LAST, p.name ASC;
+        ORDER BY CASE WHEN MAX(t.transaction_time) IS NULL THEN 1 ELSE 0 END, 
+                 latest_transaction_date DESC, 
+                 p.name ASC;
     `;
 
     const results = await db.executeSql(query, [user_id, type]);
