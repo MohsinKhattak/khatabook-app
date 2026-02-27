@@ -601,7 +601,7 @@ const HomeScreen = ({ navigation }: any) => {
             <Ionicons name="download-outline" size={normalize(20)} color="#FFFFFF" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.headerButton} onPress={() => importData()} activeOpacity={0.7}>
-            <Ionicons name="upload-outline" size={normalize(20)} color="#FFFFFF" />
+            <Ionicons name="cloud-upload-outline" size={normalize(20)} color="#FFFFFF" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
             <Text style={styles.logoutButtonText}>Logout</Text>
