@@ -421,8 +421,8 @@ const HisaabScreen = ({ route, navigation }: any) => {
       )}
       <View style={styles.tableHeader}>
         <Text style={styles.tableHeaderText}>Date</Text>
-        <Text style={styles.tableHeaderText}>{`Purchase ( ${debit} )`} </Text>
-        <Text style={styles.tableHeaderText}>{`Payment ( ${credit} )`}</Text>
+        <Text style={styles.tableHeaderText}>{`Manay Diye ( ${debit} )`} </Text>
+        <Text style={styles.tableHeaderText}>{`Manay Liye ( ${credit} )`}</Text>
       </View>
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ flexGrow: 1 }}>
         <FlatList
